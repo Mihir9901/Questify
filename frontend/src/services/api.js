@@ -2,10 +2,10 @@ import axios from 'axios';
 import useAuthStore from '../store/authStore';
 
 const api = axios.create({
-    baseURL: 'https://questify-6xs1.onrender.com',
+    // Use the full Render URL here directly to avoid environment variable issues
+    baseURL: 'https://questify-6xs1.onrender.com/api',
 });
 
-// Interceptor to inject token into requests
 api.interceptors.request.use((config) => {
     const token = useAuthStore.getState().token;
     if (token) {
