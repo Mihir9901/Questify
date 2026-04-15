@@ -16,13 +16,12 @@ connectDB();
 const app = express();
 
 app.use(cors({
-    origin: 'https://questify-topaz.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: ['https://questify-topaz.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true // Add this if you plan to use cookies/sessions
+    credentials: true
 }));
 
-app.use(cors());
 app.use(express.json()); // Allows parsing of JSON bodies
 
 // Map Routes

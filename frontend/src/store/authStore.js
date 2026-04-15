@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
+const BACKEND_URL = 'https://questify-6xs1.onrender.com';
+
 const useAuthStore = create((set) => ({
     user: JSON.parse(localStorage.getItem('user')) || null,
     token: localStorage.getItem('token') || null,
@@ -10,7 +12,7 @@ const useAuthStore = create((set) => ({
     login: async (email, password) => {
         set({ isLoading: true, error: null });
         try {
-            const { data } = await axios.post('/api/auth/login', { email, password });
+            const { data } = await axios.post(`${BACKEND_URL}/api/auth/login`, { email, password });
             localStorage.setItem('user', JSON.stringify(data));
             localStorage.setItem('token', data.token);
             set({ user: data, token: data.token, isLoading: false });
@@ -24,7 +26,7 @@ const useAuthStore = create((set) => ({
     register: async (name, email, password, role) => {
         set({ isLoading: true, error: null });
         try {
-            const { data } = await axios.post('/api/auth/register', { name, email, password, role });
+            const { data } = await axios.post(`${BACKEND_URL}/api/auth/register`, { name, email, password, role });
             localStorage.setItem('user', JSON.stringify(data));
             localStorage.setItem('token', data.token);
             set({ user: data, token: data.token, isLoading: false });
